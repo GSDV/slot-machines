@@ -1,0 +1,657 @@
+/* SET UP CSS */
+* {
+    box-sizing: border-box;
+}
+ 
+body {
+    background-color: black;
+    overflow-x: hidden;
+}
+
+
+
+/* TEXTS CSS */
+#credit-checker-text-div {
+    position: relative;
+    margin: 0px;
+    width: 100%;
+    z-index: 5;
+}
+#credit-checker-text {
+    position: absolute;
+    top: calc(12px - 1vw);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2px 8px 2px 8px;
+    width: fit-content;
+    border: 0px solid red;
+    border-radius: 25px;
+    background-color: transparent;
+    text-align: center;
+    font-size: calc(10px + 1vw);
+    color: red;
+}
+#explaining-text {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+ 
+ 
+/* STICKER SYMBOLS AROUND SLOTS */
+#first-background-symbol, #second-background-symbol, #third-background-symbol, #fourth-background-symbol, #fifth-background-symbol, #sixth-background-symbol, #seventh-background-symbol {
+    position: absolute;
+    width: clamp(70px, 7vw, 100px);
+    user-select: none;
+    z-index: -1;
+}
+#first-background-symbol {top: 2px;left: 50%;transform: translateX(-50%);}
+#second-background-symbol {top: 3%;right: 17%;transform: rotate(-10deg);}
+#third-background-symbol {top: 13%;right: 5%;transform: rotate(10deg);}
+#fourth-background-symbol {top: 29%;right: 9%;transform: rotate(-6deg);}
+#fifth-background-symbol {top: 31%;left: 9%;transform: rotate(13deg);}
+#sixth-background-symbol {top: 18%;left: 2%;transform: rotate(-7deg);}
+#seventh-background-symbol {top: 8%;left: 13%;transform: rotate(13deg);}
+
+#gif-border {
+    position: absolute;
+    top: clamp(25%, calc(20% + 14vw), 43%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#gif-border img {
+    width: clamp(50px, 10vw, 150px);
+}
+
+
+
+/* AUDIO */
+#audio-toggle {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 5px;
+    width: 60px;
+    height: 60px;
+    border: 8px solid black;
+    border-radius: 20px;
+    background-color: white;
+    overflow: hidden;
+    z-index: 3;
+}
+#audio-icon {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+}
+#audio-icon:hover {
+    cursor: pointer;
+}
+
+
+
+/* SLOT MACHINE */
+#slot-row {
+    position: relative;
+    margin: 0 auto;
+    max-width: 1156px;
+    display: flex;
+    flex-direction: row;
+}
+#slot-machine {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    border: 10px solid var(--second-color);
+    background-color: var(--first-color);
+    overflow-x: hidden;
+    user-select: none;
+    z-index: 2;
+}
+#slot-container-wrapper {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0px;
+    width: fit-content;
+    border-radius: 25px;
+    overflow: hidden;
+}
+.slot-container-class {
+    margin: 0px;
+    width: clamp(370px, 100%, 550px);
+    height: clamp(150px, 25vw, 250px);
+    border: 15px solid var(--second-color);
+    border-radius: 25px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    user-select: none;
+}
+ 
+#first-column, #second-column, #third-column {
+    margin: 0px;
+    width: 33.33333%;
+    border: 7px solid black;
+    background-color: rgb(236, 236, 236);
+}
+ 
+.slot-image {
+    width: 15vw;
+    min-width: 100px;
+    max-width: 150px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.glowing-animation {
+    animation: 0.5s glowing-animation infinite linear alternate;
+}
+@keyframes glowing-animation {
+    0% {background-color: rgb(236, 236, 236);}
+    100% {background-color: rgb(255, 222, 36);}
+}
+
+.glowing-win-border {
+	border: 15px solid;
+	border-image: conic-gradient(from 0deg, red, yellow, lime, aqua, blue, magenta, red) 1;
+    border-radius: 25px;
+	animation: 1s rotate infinite linear;
+}
+
+/* Houdini Browsers: Animate the gradient using Houdini Magic */
+/* As we can't use @supports for @property (see https://github.com/w3c/csswg-drafts/issues/2463) we're using another way to target browsers that speak Houdini. */
+@supports (background: paint(worklet)) {
+	@property --angle {
+		syntax: '<angle>';
+		initial-value: 0deg;
+		inherits: false;
+	}
+
+	.glowing-win-border {
+		--angle: 0deg;
+		border-image: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red) 1;
+	}
+
+	@keyframes rotate {
+		to {--angle: 360deg;}
+	}
+}
+
+/* Non-Houdini Browsers: Manually adjust the border-image frame by frame … */
+/* Code was generate using the little JS snippet included with this pen */
+@supports not (background: paint(worklet)) {
+    @keyframes rotate {
+        0% { border-image: conic-gradient(from 0.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        1% { border-image: conic-gradient(from 3.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        2% { border-image: conic-gradient(from 7.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        3% { border-image: conic-gradient(from 10.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        4% { border-image: conic-gradient(from 14.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        5% { border-image: conic-gradient(from 18.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        6% { border-image: conic-gradient(from 21.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        7% { border-image: conic-gradient(from 25.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        8% { border-image: conic-gradient(from 28.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        9% { border-image: conic-gradient(from 32.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        10% { border-image: conic-gradient(from 36.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        11% { border-image: conic-gradient(from 39.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        12% { border-image: conic-gradient(from 43.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        13% { border-image: conic-gradient(from 46.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        14% { border-image: conic-gradient(from 50.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        15% { border-image: conic-gradient(from 54.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        16% { border-image: conic-gradient(from 57.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        17% { border-image: conic-gradient(from 61.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        18% { border-image: conic-gradient(from 64.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        19% { border-image: conic-gradient(from 68.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        20% { border-image: conic-gradient(from 72.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        21% { border-image: conic-gradient(from 75.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        22% { border-image: conic-gradient(from 79.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        23% { border-image: conic-gradient(from 82.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        24% { border-image: conic-gradient(from 86.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        25% { border-image: conic-gradient(from 90.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        26% { border-image: conic-gradient(from 93.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        27% { border-image: conic-gradient(from 97.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        28% { border-image: conic-gradient(from 100.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        29% { border-image: conic-gradient(from 104.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        30% { border-image: conic-gradient(from 108.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        31% { border-image: conic-gradient(from 111.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        32% { border-image: conic-gradient(from 115.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        33% { border-image: conic-gradient(from 118.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        34% { border-image: conic-gradient(from 122.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        35% { border-image: conic-gradient(from 126.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        36% { border-image: conic-gradient(from 129.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        37% { border-image: conic-gradient(from 133.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        38% { border-image: conic-gradient(from 136.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        39% { border-image: conic-gradient(from 140.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        40% { border-image: conic-gradient(from 144.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        41% { border-image: conic-gradient(from 147.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        42% { border-image: conic-gradient(from 151.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        43% { border-image: conic-gradient(from 154.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        44% { border-image: conic-gradient(from 158.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        45% { border-image: conic-gradient(from 162.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        46% { border-image: conic-gradient(from 165.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        47% { border-image: conic-gradient(from 169.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        48% { border-image: conic-gradient(from 172.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        49% { border-image: conic-gradient(from 176.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        50% { border-image: conic-gradient(from 180.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        51% { border-image: conic-gradient(from 183.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        52% { border-image: conic-gradient(from 187.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        53% { border-image: conic-gradient(from 190.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        54% { border-image: conic-gradient(from 194.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        55% { border-image: conic-gradient(from 198.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        56% { border-image: conic-gradient(from 201.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        57% { border-image: conic-gradient(from 205.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        58% { border-image: conic-gradient(from 208.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        59% { border-image: conic-gradient(from 212.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        60% { border-image: conic-gradient(from 216.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        61% { border-image: conic-gradient(from 219.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        62% { border-image: conic-gradient(from 223.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        63% { border-image: conic-gradient(from 226.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        64% { border-image: conic-gradient(from 230.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        65% { border-image: conic-gradient(from 234.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        66% { border-image: conic-gradient(from 237.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        67% { border-image: conic-gradient(from 241.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        68% { border-image: conic-gradient(from 244.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        69% { border-image: conic-gradient(from 248.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        70% { border-image: conic-gradient(from 252.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        71% { border-image: conic-gradient(from 255.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        72% { border-image: conic-gradient(from 259.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        73% { border-image: conic-gradient(from 262.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        74% { border-image: conic-gradient(from 266.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        75% { border-image: conic-gradient(from 270.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        76% { border-image: conic-gradient(from 273.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        77% { border-image: conic-gradient(from 277.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        78% { border-image: conic-gradient(from 280.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        79% { border-image: conic-gradient(from 284.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        80% { border-image: conic-gradient(from 288.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        81% { border-image: conic-gradient(from 291.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        82% { border-image: conic-gradient(from 295.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        83% { border-image: conic-gradient(from 298.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        84% { border-image: conic-gradient(from 302.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        85% { border-image: conic-gradient(from 306.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        86% { border-image: conic-gradient(from 309.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        87% { border-image: conic-gradient(from 313.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        88% { border-image: conic-gradient(from 316.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        89% { border-image: conic-gradient(from 320.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        90% { border-image: conic-gradient(from 324.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        91% { border-image: conic-gradient(from 327.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        92% { border-image: conic-gradient(from 331.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        93% { border-image: conic-gradient(from 334.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        94% { border-image: conic-gradient(from 338.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        95% { border-image: conic-gradient(from 342.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        96% { border-image: conic-gradient(from 345.60deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        97% { border-image: conic-gradient(from 349.20deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        98% { border-image: conic-gradient(from 352.80deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        99% { border-image: conic-gradient(from 356.40deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+        100% { border-image: conic-gradient(from 360.00deg, red, yellow, lime, aqua, blue, magenta, red) 1; }
+	}
+}
+
+
+
+/* LEVER CSS */
+#lever-row {
+    display: flex;
+    flex-direction: row;
+    z-index: 3;
+}
+#lever-base {
+    position: relative;
+    top: 300px;
+    width: 5vw;
+    max-width: 40px;
+    height: 150px;
+    border: 1px solid rgb(119, 119, 119);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    background-color: rgb(119, 119, 119);
+}
+#ball-and-lever-div {
+    position: relative;
+    left: -24px;
+    top: 30px;
+    height: 375px;
+    display: flex;
+    flex-direction: column;
+}
+.lever-animation-class {
+    animation: 1s move-animation linear;
+    animation-iteration-count: 1;
+}
+@keyframes move-animation {
+    0% {transform: translateY(0px); height: 375px;}
+    50% {transform: translateY(250px); height: 125px;}
+    100% {transform: translateY(0px); height: 375px;}
+}
+#lever-ball {
+    position: relative;
+    margin: 0 auto;
+    top: 10px;
+    width: 70px;
+    height: 70px;
+    border: 5px solid var(--third-color);
+    border-radius: 50%;
+    background-color: var(--second-color);
+    z-index: 2;
+}
+.lever-ball-class:hover {
+    cursor: pointer;
+}
+.lever-ball-animation-class {
+    pointer-events: none;
+}
+#lever-stick {
+    position: relative;
+    margin: 0 auto;
+    width: 25px;
+    height: 300px;
+    border: 1px solid rgb(85, 84, 84);
+    border-bottom-right-radius: 10px;
+    background-color: rgb(85, 84, 84);
+}
+.lever-stick-class:hover {
+    cursor: pointer;
+}
+.lever-stick-animation-class {
+    animation: 1s stick-animation linear;
+    animation-iteration-count: 1;
+}
+.lever-stick-animation-class:hover {
+    cursor: not-allowed;
+}
+@keyframes stick-animation {
+    0% {height: 300px;}
+    50% {height: 50px;}
+    100% {height: 300px;}
+}
+
+
+
+/* STATUS DIVS CSS */
+#status-div {
+    position: relative;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    user-select: none;
+    z-index: 3;
+}
+#credit-and-wager-div {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+ 
+/* REMAINING CREDITS CSS */
+#amount-of-credits {
+    margin: 5px;
+    padding: 10px;
+    width: fit-content;
+    height: calc(30px + 3vw);
+    border: 5px solid var(--second-color);
+    border-radius: 10px;
+    background-color: white;
+    font-size: calc(5px + 2vw);
+}
+#amount-of-credits  p {
+    margin: 0px;
+}
+ 
+/* WAGER CSS */
+#amount-wager-div {
+    margin: 5px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+#amount-wager {
+    margin: 0px;
+    padding: 10px;
+    width: fit-content;
+    height: 100%;
+    border: 5px solid var(--second-color);
+    border-right-width: 0px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    font-size: calc(5px + 2vw);
+}
+#up-wager, #down-wager {
+    position: relative;
+    margin: 0px;
+    width: max(calc(25px + 1vw), 20px);
+    height: 50%;
+    border: 5px solid var(--second-color);
+    background-color: white;
+    text-align: center;
+    user-select: none;
+}
+#up-wager:hover, #down-wager:hover {
+    cursor: pointer;
+}
+#up-wager {
+    border-bottom-width: 2.5px;
+    border-top-right-radius: 10px;
+}
+#down-wager {
+    border-top-width: 2.5px;
+    border-bottom-right-radius: 10px;
+}
+#wager-arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: calc(10px + 1vw);
+}
+#max-or-min-wager-div {
+    position: relative;
+    margin: 0px;
+    width: 100%;
+}
+#max-or-min-wager {
+    position: absolute;
+    top: 12px;
+    left: 140px;
+    transform: translate(-50%, -50%);
+    margin: 0px;
+    width: 350px;
+    user-select: none;
+    font-size: 20px;
+    color: red;
+}
+
+
+
+/* WIN OR LOSE CSS */
+#win-or-lose {
+    margin: 0 auto;
+    width: fit-content;
+    border-radius: 25px;
+    color: rgb(131, 131, 131);
+    z-index: 3;
+}
+h4 {
+    margin: 5px 10px;
+    text-align: center;
+    font-size: 5vw;
+    white-space: nowrap;
+}
+#first-win-or-lose, #second-win-or-lose, #third-win-or-lose {
+    border: 15px solid var(--second-color);
+    background-color: rgb(75, 75, 75);
+}
+#first-win-or-lose {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-width: 7.5px;
+}
+#second-win-or-lose {
+    border-top-width: 7.5px;
+    border-bottom-width: 7.5px;
+}
+#third-win-or-lose {
+    border-top-width: 7.5px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+.win-or-lose-animation {
+    animation: 0.5s win-or-lose-animation infinite linear alternate;
+}
+@keyframes win-or-lose-animation {
+    0% {
+        background-color: rgb(75, 75, 75);
+        color: rgb(131, 131, 131);
+    }
+    100% {
+        background-color: yellow;
+        color: white;
+    }
+}
+
+/* AUTO SPIN CSS */
+#auto-spin-div {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+}
+#auto-spin-div:hover {
+    cursor: pointer;
+    user-select: none;
+}
+#auto-spin {
+    padding: 10px;
+    width: fit-content;
+    height: calc(40px + 2vw);
+    border: 7px solid blue;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: white;
+    font-size: calc(5px + 2vw);
+    white-space: nowrap;
+}
+#auto-spin-check {
+    margin: 0px 5px 5px 0px;
+    width: calc(35px + 2vw);
+    height: calc(40px + 2vw);;
+    border: 7px solid blue;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: 0px;
+    background-color: rgb(158, 158, 158);
+}
+#checkmark-text {
+    position: relative;
+    bottom: calc(15px + 0.2vw);
+    font-size: calc(35px + 2vw);
+    font-weight: 900;
+    color: red;
+}
+
+
+
+
+
+/* PAY TABLE POP UP CSS */
+#info-button {
+    margin: 5px;
+    padding: 10px 0px 10px 0px;
+    width: 260px;
+    height: 60px;
+    border: 5px solid var(--third-color);
+    border-radius: 20px;
+    background-color: var(--second-color);
+    z-index: 3;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 900;
+    color: white;
+}
+#info-button:hover {
+    cursor: pointer;
+}
+ 
+#pop-up-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 100px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    overflow: auto;
+    user-select: none;
+    z-index: 5;
+}
+#pop-up-box-content {
+    position: relative;
+    margin: 0 auto;
+    padding: 10px;
+    width: 50%;
+    min-width: 500px;
+    max-width: 600px;;
+    height: 450px;
+    border: 10px solid var(--third-color);
+    border-radius: 20px;
+    background-color: var(--second-color);
+    box-shadow: 8px 10px 15px 5px rgba(0, 0, 0, 0.63);
+    animation-name: 0.4s pop-up-animation;
+    text-align: center;
+    color: white;
+}
+@keyframes pop-up-animation {
+    from {top: -300px; opacity: 0;}
+    to {top: 0; opacity: 1;}
+}
+#close-pop-up-box {
+    position: relative;
+    top: 5px;
+    margin: 0 auto;
+    width: 90px;
+    height: 60px;
+    border: 10px solid var(--third-color);
+    border-radius: 20px;
+    background-color: var(--second-color);
+    display: block;
+    font-size: 35px;
+    font-weight: 900;
+    text-align: center;
+    color: white;
+}
+#close-pop-up-box:hover, #close-pop-up-box:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+ 
+hr {
+    margin-top: 5px;
+    margin-bottom: 25px;
+    width: 100%;
+    border: 5px solid var(--third-color);
+    background-color: var(--third-color);
+}
+ 
+table, td, th {border: 2px solid black;}
+th {font-size: 30px;}
+td {height: 50px;}
+ 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    color: black;
+}
+.pay-table-images {
+    width: 30px;
+    height: 30px;
+    vertical-align: sub;
+}

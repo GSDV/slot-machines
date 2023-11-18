@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<link rel="stylesheet" href="slot-machine.css">
+<title>Slot Machine</title>
+<style>
+:root {
+    --first-color: #03ad2c;
+    --second-color: #0b571d;
+    --third-color: #198533;
+}
+</style>
+</head>
+
+<body>
+<audio id="play-sound" src="play-sound.mp3"></audio>
+<audio id="win-sound" src="win-sound.mp3"></audio>
+
+
+<div id="pop-up-box">
+    <div id="pop-up-box-content">
+        <h1 style="font-size: 30px; padding: 0px; margin: 0px;">Pay Table</h1>
+        <h2 style="font-size: 20px; padding: 0px; margin: 0px;">List of Payouts</h2>
+        <hr>
+        <table>
+            <tr>
+                <th>Win Combination</th>
+                <th>Reward</th>
+            </tr>
+
+            <tr>
+                <td><img class="pay-table-images">&nbsp;&nbsp;&nbsp;<span style="font-size: 17px; font-weight: 900; position: relative; bottom: 5px;">X</span><span style="font-size: 35px; font-weight: 900;">&nbsp;3</span></td>
+                <td><span style="font-size: 30px; font-weight: 900;">500 credits</span></td>
+            </tr>
+            <tr>
+                <td><img class="pay-table-images">&nbsp;&nbsp;&nbsp;<span style="font-size: 17px; font-weight: 900; position: relative; bottom: 5px;">X</span><span style="font-size: 35px; font-weight: 900;">&nbsp;2</span></td>
+                <td><span style="font-size: 30px; font-weight: 900;">300 credits</span></td>
+            </tr>
+            <tr>
+                <td><img class="pay-table-images">&nbsp;&nbsp;&nbsp;<span style="font-size: 17px; font-weight: 900; position: relative; bottom: 5px;">X</span><span style="font-size: 35px; font-weight: 900;">&nbsp;1</span></td>
+                <td><span style="font-size: 30px; font-weight: 900;">100 credits</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-size: 30px; font-weight: 900;">&nbsp;Any 3 Symbols</span></td>
+                <td><span style="font-size: 20px; font-weight: 900;">4 Times Wager Amount</span></td>
+            </tr>
+            <tr>
+                <td><span style="font-size: 30px; font-weight: 900;">&nbsp;Any 2 Symbols</span></td>
+                <td><span style="font-size: 20px; font-weight: 900;">2 Times Wager Amount</span></td>
+            </tr>
+        </table>
+        <span id="close-pop-up-box" onclick="closePopUp()">OK</span>
+    </div>
+</div>
+
+
+
+<div id="slot-row">
+
+    <div id="slot-machine">
+        <div id="gif-border"><img id="gif-id"></div>
+
+		<div id="audio-toggle" onclick="toggleAudio()"><img id="audio-icon" src="audio_on.png"></div>
+			
+        <img draggable="false" id="first-background-symbol">
+        <img draggable="false" id="second-background-symbol">
+        <img draggable="false" id="third-background-symbol">
+        <img draggable="false" id="fourth-background-symbol">
+        <img draggable="false" id="fifth-background-symbol">
+        <img draggable="false" id="sixth-background-symbol">
+        <img draggable="false" id="seventh-background-symbol">
+
+
+    <div id="info-button" onclick="displayPayTable()"><p style="display: inline;">Click &nbsp;To &nbsp;See &nbsp;Pay &nbsp;Table</p></div>
+
+        <div id="credit-checker-text-div"><h3 id="credit-checker-text"></h3></div>
+
+
+        <div id="slot-container-wrapper">
+            <div id="slot-container" class="slot-container-class">
+                <div id="first-column"><img draggable="false" id="first-image" class="slot-image"></div>
+                <div id="second-column"><img draggable="false" id="second-image" class="slot-image"></div>
+                <div id="third-column"><img draggable="false" id="third-image" class="slot-image"></div>
+            </div>
+        </div>
+
+
+
+        <div id="status-div">
+            <div id="credit-and-wager-div">
+                <div id="amount-of-credits"><p>Credits: 300</p></div>
+
+                <div id="amount-wager-div">
+                    <div style="display: flex; flex-direction: row; height: calc(40px + 2vw);">
+                        <div id="amount-wager">Wager: 10</div>
+                        <div>
+                            <div id="up-wager" onclick="upTheWager()"><div id="wager-arrow">&#9650;</div></div>
+                            <div id="down-wager" onclick="downTheWager()"><div id="wager-arrow">&#9660;</div></div>
+                        </div>
+                    </div>
+
+                    <div id="max-or-min-wager-div"><p id="max-or-min-wager"></p></div>
+                </div>
+
+                <div id="auto-spin-div" onclick="toggleAutoSpin()">
+                        <div id="auto-spin">Toggle Auto Spin</div>
+                        <div id="auto-spin-check"><span id="checkmark-text">&#x2717;</span></div>
+                </div>
+            </div>
+
+            <div id="win-or-lose">
+                <div id="first-win-or-lose"><h4>BIG WIN</h4></div>
+                <div id="second-win-or-lose"><h4>WIN</h4></div>
+                <div id="third-win-or-lose"><h4>LOSE</h4></div>
+            </div>
+
+        </div>
+        <h6 id="explaining-text">Click the pull lever to play!</h6>
+    </div>
+
+
+    <div id="lever-row">
+        <div id="lever-base"></div>
+ 
+        <div id="ball-and-lever-div">
+            <div id="lever-ball" class="lever-ball-class" onclick="checkIfSufficientCreditsAvailable()"></div>
+            <div id="lever-stick" class="lever-stick-class" onclick="checkIfSufficientCreditsAvailable()"></div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+//SET UP SPECIFIC SLOT
+document.title = "Adventure Slot Machine";
+
+var symbolArray = [
+    `idol`,
+    `compass`,
+    `bone`,
+    `sauropod`,
+    `spider`,
+    `snake`,
+    `map`,
+    `volcano`,
+    `tiki`,
+    `torch`,
+    `t-rex`,
+    `katana`
+]
+var slotSymbols = "Adventure-Symbols";
+var specialSymbol = symbolArray[0];
+var gifName = "dinosaur.png";
+
+for (var i=0; i<3; i++) {document.getElementsByClassName("pay-table-images")[i].src = "Symbols/" + slotSymbols + "/" + specialSymbol + ".png";}
+document.getElementById("gif-id").src = "Symbols/" + slotSymbols + "/" + gifName;
+</script>
+<script src="slot-machine.js"></script>
+</body>
+</html>

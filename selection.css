@@ -1,0 +1,63 @@
+* {
+	box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    background: url(fireworks/city.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-color: black;
+    background-size: 100%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 5vw;
+    color: white;
+    background-color: gold;
+    border: 15px solid rgb(148, 126, 4);
+    border-radius: 25px;
+    width: 80%;
+    user-select: none;
+    margin: 30px auto;
+    z-index: 2;
+}
+
+.firework {
+    position: absolute;
+    width: 40vw;
+    z-index: -1;
+}
+
+
+#row-div {
+    margin: 10px auto 200px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 20px solid gold;
+    border-radius: 10px;
+    width: 83%;
+    user-select: none;
+    z-index: 2;
+    background-color: black;
+}
+#row-div a {
+    border: 5px solid rgb(75, 75, 75);
+    width: 25%;
+    overflow: hidden;
+    text-decoration: none;
+}
+#row-div img {
+    width: 99%;
+}
+#row-div h3 {
+    text-align: center;
+    font-size: calc(8px + 1.5vw);
+    color: white;
+    text-decoration: none;
+}
