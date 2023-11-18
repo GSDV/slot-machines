@@ -14,7 +14,7 @@ and open the "selection.html" file to choose a slot machine.
 This is a collection of themed slot machines styled in CSS. Pull the lever and watch the symbols spin!
 
 
-<img src="https://github.com/GSDV/slot-machines/blob/main/selection.png" alt="Homepage" style="width:100%;"/>
+<img src="https://github.com/GSDV/slot-machines/blob/main/img/selection.png" alt="Homepage" style="width:100%;"/>
 
 
-<img src="https://github.com/GSDV/slot-machines/blob/main/thumbnail.png" alt="Homepage" style="width:100%;"/>
+<img src="https://github.com/GSDV/slot-machines/blob/main/img/thumbnail.png" alt="Homepage" style="width:100%;"/>
